@@ -30,7 +30,7 @@ besteht aus
 ```
             Ring4   Ring3   Ring2   Ring1
 Beispiel: 0b0000000 0000000 100110 100110
-LV & LH jeweils LED2+3+5
+LV & LH jeweils LED2+3+7
 ```
 |  BIT  |  Ring  | LED    |
 | :---: | :----: | ------ |
