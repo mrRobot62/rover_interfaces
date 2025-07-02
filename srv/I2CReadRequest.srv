@@ -1,0 +1,5 @@
+# Request
+string device
+# ---
+# Response
+float64[] values
