@@ -7,8 +7,9 @@ find_package(rosidl_default_generators REQUIRED)
 rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/LEDMessage.msg"
   "msg/Battery.msg"
-  "msg/I2CReadRequest.msg"
   "msg/I2CWrite.msg"
+  "msg/I2CReadResult.msg"
+  "srv/I2CReadRequest.srv"
 )
 
 ament_package()
