@@ -10,6 +10,7 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/I2CWrite.msg"
   "msg/I2CReadResult.msg"
   "srv/I2CReadRequest.srv"
+  "srv/I2Cesp32ReadRequest.srv"
 )
 
 ament_package()
