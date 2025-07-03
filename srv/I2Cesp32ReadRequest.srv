@@ -1,0 +1,8 @@
+# Request für den ESP32 verwendet wird
+string device
+int32 command           # Command für den Slave
+int32 subcommand        # ggf. SubCommand für den Slave (z.B. esp32)
+---
+# Response
+float32 fvalues         # gefüllt je nach command/subcommand
+int32[] ivalues         # gefüllt je nach command/subcommand

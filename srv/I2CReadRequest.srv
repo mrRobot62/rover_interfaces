@@ -1,5 +1,7 @@
-# Request
-string device
+# Request der allgemein für I2C Slaves genutzt werden kann
+# nicht optimal für den ESP32
+# kann auch für den ADS1115 verwendet werden
+string device           # z.B. "ads1115" oder "ADS1115"
 ---
 # Response
-float64[] values
+float32 fvalues         # gefüllt je nach command/subcommand
