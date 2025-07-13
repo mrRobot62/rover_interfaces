@@ -14,22 +14,31 @@ Messagers in diesem folder werden als Service-Messages verwendet
 
 ## 🧭 Übersicht: Unterschiede zwischen `.msg` und `.srv`
 
-| Kriterium          | Topic (`.msg`)                     | Service (`.srv`)                   |
-| ------------------ | ---------------------------------- | ---------------------------------- |
-| Kommunikationsart  | **Asynchron, ungerichtet**         | **Synchron, anfragebasiert**       |
-| Beziehung          | Publisher ↔ Subscriber             | Client ↔ Server                    |
-| Antwort notwendig? | Nein                               | Ja (Request → Response)            |
-| Wiederholung       | Periodisch oder Event-getriggert   | Nur bei konkretem Aufruf           |
-| Typische Beispiele | Sensorwerte, Steuerbefehle, Status | Konfiguration, Befehle mit Antwort |
+| Kriterium          | Topic (`.msg`)                     | Service (`.srv`)                        |
+| ------------------ | ---------------------------------- | --------------------------------------- |
+| Kommunikationsart  | **Asynchron, ungerichtet**         | **Synchron, anfragebasiert, gerichtet** |
+| Beziehung          | Publisher ↔ Subscriber             | Client ↔ Server                         |
+| Antwort notwendig? | Nein                               | Ja (Request → Response)                 |
+| Wiederholung       | Periodisch oder Event-getriggert   | Nur bei konkretem Aufruf                |
+| Typische Beispiele | Sensorwerte, Steuerbefehle, Status | Konfiguration, Befehle mit Antwort      |
 
 ---
+
+## 🧪 Design-Hinweise
+
+- ⚠ **Topics sind "fire-and-forget"**  
+  → Es gibt keine Bestätigung, ob jemand zuhört oder die Nachricht verarbeitet  
+- ✅ **Services bieten Rückmeldung**  
+  → Du bekommst garantiert eine Antwort (oder Timeout)  
+- 🔁 **Kombination möglich**  
+  → z. B. per Service „Start Messung“ → Status als Topic publizieren
+
 
 ## 🛠 Anwendungsfälle im Rover-Projekt
 
 ### ✅ Verwende **Topics (`.msg`)** für:
 
 - **Sensoren**: Lidar, IMU, Kamera, Ultraschall etc. → liefern kontinuierliche Daten  
-- **Motorsteuerung**: z. B. gewünschte Geschwindigkeit oder Richtung (`geometry_msgs/Twist`)  
 - **Statusanzeigen**: Batteriestand, Temperatur, Diagnosen  
 - **LED-Muster**: einfache visuelle Signale wie z. B. `LEDPattern.msg` via `/led`  
 
@@ -50,6 +59,8 @@ ros2 topic pub /led rover/LEDPattern "{pattern: 3}"
   z. B. ein ADC-Wert bei Bedarf (nicht gestreamt)  
 - **Zentralisierte Steuerung**  
   z. B. Ein- und Ausschalten von Subsystemen, Reset-Kommandos  
+- **ESP32**:
+  z. B. gewünschte Geschwindigkeit oder Richtung. Hintergrund ist, das automatisch auf einen Befehl hin auch ein Response gesetzt werden kann
 
 #### Beispiel:
 ```bash
@@ -87,14 +98,6 @@ rover/
 
 ---
 
-## 🧪 Debugging & Design-Hinweise
-
-- ⚠ **Topics sind "fire-and-forget"**  
-  → Es gibt keine Bestätigung, ob jemand zuhört oder die Nachricht verarbeitet  
-- ✅ **Services bieten Rückmeldung**  
-  → Du bekommst garantiert eine Antwort (oder Timeout)  
-- 🔁 **Kombination möglich**  
-  → z. B. per Service „Start Messung“ → Status als Topic publizieren
 
 ---
 

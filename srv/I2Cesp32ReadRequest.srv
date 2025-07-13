@@ -1,4 +1,8 @@
 # Request für den ESP32 verwendet wird
+#
+# Diese Daten ist deprecated nicht nutzen
+# Neu Version ist in I2CESP32Communication.srv implementiert
+# 
 string device
 int32 command           # Command für den Slave
 int32 subcommand        # ggf. SubCommand für den Slave (z.B. esp32)

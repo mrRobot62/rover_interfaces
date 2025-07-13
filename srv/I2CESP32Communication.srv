@@ -1,0 +1,16 @@
+# Request für den ESP32 verwendet wird
+#
+# command:              1=dynamixel, 2=esp32
+# subcommand:           1=write, 2=read, 3=status
+# fvalues               bei cmd=1, scmd=1, fvalues[0] = steering-wert, fvalues[1]=velocity-wert
+# ivalues               bei cmd=2, scmd=1, ivalues[0]=pin1, ivalues[1]=state_pin1, ivalues[2]=pin2, ivalues[2]=state_pin2, ...
+string device           # 'ESP32' 
+int32 command           # Command für den Slave
+int32 subcommand        # ggf. SubCommand für den Slave (z.B. esp32)
+float32 fvalues         # gefüllt je nach command/subcommand
+int32[] ivalues         # gefüllt je nach command/subcommand
+
+---
+# Response
+float32 fvalues         # gefüllt je nach command/subcommand
+int32[] ivalues         # gefüllt je nach command/subcommand
